@@ -1,0 +1,603 @@
+%!TEX program = xelatex
+\RequirePackage{xcolor}
+\documentclass[
+    numbers=noenddot,
+    open=any,
+    paper=a4,
+    oneside,
+    pagesize,
+    captions=tableheading,
+    bibliography=totoc,
+    11pt
+    ]{scrbook}
+\usepackage[
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm,
+    heightrounded
+]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage[warnings-off={mathtools-colon, mathtools-overbracket}]{unicode-math}
+\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\newcommand{\euro}{€}
+\setmainfont[Scale=MatchLowercase,]{XITS}
+\setsansfont[Scale=MatchLowercase,]{Source Sans Pro}
+\setmonofont[Mapping=tex-ansi,Scale=MatchLowercase]{Hack}
+\setmathfont{Asana Math}
+\usepackage{upquote}
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath}
+% disable orphaned lines
+\clubpenalty=10000
+\displaywidowpenalty=10000
+\widowpenalty=10000
+\tolerance 1414
+\hbadness 1414
+\emergencystretch 1.5em
+\hfuzz 0.3pt
+\vfuzz 0.3pt
+\raggedbottom
+% more space between footnote and text
+\setlength{\skip\footins}{7mm}
+% footnotes
+\deffootnote{2.25em}{1.75em}{\thefootnotemark\enspace}
+
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{ngerman}
+
+\usepackage{csquotes}
+\usepackage[
+    backend=biber,
+    bibstyle=biblatex-sp-unified,
+    citestyle=sp-authoryear-comp,
+    maxcitenames=3,
+    maxbibnames=99,
+    url=false
+]{biblatex}
+\addbibresource{../bibliographyuni.bib}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+    \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\title{Booktitle}
+\subtitle{A Fitting Subtitle (Or Not)}
+\subtitle{Georg-August-University Göttingen}
+\subtitle{Some Titlehead}
+\subtitle{Linguistics}
+\author{Maik Thalmann\footnote{Georg-August-University Göttingen,
+  \href{mailto:maik.thalmann@gmail.com}{\nolinkurl{maik.thalmann@gmail.com}}}}
+\date{Göttingen, 12 April, 2020}
+\uppertitleback{Obiger Titelrückentitel}
+\lowertitleback{Für dieses Beispiel wird keine Haftung übernommen.}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+%%--------------------------
+
+\usepackage{multicol}
+\renewcommand{\arraystretch}{1.03}
+\usepackage{ltablex}
+\usepackage{booktabs}
+\usepackage{float}
+
+% colors
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{
+    decorations.text, backgrounds, arrows.meta,
+    decorations.pathreplacing, calc, fit,
+    shapes,positioning, intersections, decorations.markings
+}
+\definecolor{mygreen}{RGB}{6, 107, 138} % 0, 19, 108
+\definecolor{myred}{RGB}{141, 144, 150} %        96, 106, 179;
+\definecolor{chaptercolor}{RGB}{188, 193, 204}
+\newcommand*{\mygreen}[1]{\textcolor{mygreen}{\textbf{#1}}}
+\newcommand*{\myred}[1]{\textcolor{myred}{\textbf{#1}}}
+
+% trees in interpretation function
+\newbox\mytreebox
+\newbox\mytreeboxwithdelim
+\makeatletter
+\newcommand\TreeWithDelim [1]{%
+  \setbox\mytreebox\hbox{{#1}}%
+  \setbox\mytreeboxwithdelim\hbox{$\left\llbracket\vcenter{\copy\mytreebox}\right\rrbracket$}%
+  \dimen@=\dimexpr\ht\mytreeboxwithdelim+\dp\mytreeboxwithdelim\relax
+  % in my testing, same as total height of non decorated tree box
+  \leavevmode\raise\dimexpr-.5\dimen@-\fontdimen22\textfont2+\ht\mytreebox\relax\box\mytreeboxwithdelim
+}
+\newcommand\TreeWithDelimParen [1]{%
+  \setbox\mytreebox\hbox{{#1}}%
+  \setbox\mytreeboxwithdelim\hbox{$\left(\left\llbracket\vcenter{\copy\mytreebox}\right\rrbracket\right)$}%
+  \dimen@=\dimexpr\ht\mytreeboxwithdelim+\dp\mytreeboxwithdelim\relax
+  % in my testing, same as total height of non decorated tree box
+  \leavevmode\raise\dimexpr-.5\dimen@-\fontdimen22\textfont2+\ht\mytreebox\relax\box\mytreeboxwithdelim
+}
+\makeatother
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks  = true,
+    urlcolor    = mygreen,
+    linkcolor   = mygreen,
+    citecolor   = mygreen,
+    pdfauthor   = {Maik Thalmann},
+    pdfproducer = {XeLaTeX},
+    pdfsubject  = {Linguistics; Göttingen, 12 April, 2020},
+}
+
+% packages necessary for the semantics
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage[cal=esstix]{mathalfa}
+\usepackage{upgreek}
+\usepackage{wasysym}
+\usepackage{stmaryrd}
+\usepackage{soul}
+\newcommand{\sem}[1]{\mbox{$\llbracket$\sffamily\textbf{#1}$\rrbracket$}}
+
+% checklists
+\usepackage{enumitem}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+    \hspace{-2.5pt}}
+\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
+
+% header and footer
+\usepackage{scrlayer-scrpage}
+\clearscrheadfoot
+% smaller header font size
+\ohead{Booktitle}
+\ofoot{\pagemark}
+\ifoot{\url{https://mkthalmann.github.io/home/}}
+\pagestyle{scrheadings}
+
+% ToC
+\BeforeTOCHead[toc]{%
+  \KOMAoptions{parskip=false}
+}
+% change depth of TOC
+\setcounter{tocdepth}{0}
+% only number parts, chapters, and sections
+\setcounter{secnumdepth}{1}
+% custom entry formats for parts and chapters in ToC
+\DeclareTOCStyleEntry[
+  indent=2.5cm,
+  beforeskip=.4cm,
+  entryformat=\sffamily\large\textbf,
+  pagenumberformat=\scriptsize\rmfamily\color{chaptercolor},
+  linefill=\quad,
+  raggedpagenumber
+]{chapter}{part}
+\DeclareTOCStyleEntry[
+  indent=3.5cm,
+  beforeskip=.1cm,
+  entryformat=\sffamily,
+  pagenumberformat=\scriptsize\rmfamily\color{chaptercolor},
+  linefill=\quad,
+  raggedpagenumber
+]{chapter}{chapter}
+
+\usepackage{relsize}
+\usepackage[framemethod=tikz]{mdframed}
+% custom rule environment
+\newmdenv[
+  linecolor=chaptercolor,
+  linewidth=2pt,
+  topline=false,
+  bottomline=false,
+  rightmargin=0,
+  leftmargin=0,
+  innerrightmargin=5pt,
+  innerleftmargin=5pt
+]{rulebox}
+% custom quotation environment
+\newmdenv[
+  linecolor=chaptercolor,
+  backgroundcolor=chaptercolor!20,
+  linewidth=4pt,
+  font=\smaller,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  innerrightmargin=5pt,
+  innerleftmargin=5pt
+]{quotebox}
+
+% part page
+\newcommand*\partnumber{}
+\DeclareNewLayer[
+  background,
+  textarea,
+  mode=picture,
+  contents={%
+      \putC{
+        \begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
+          \begin{scope}[x={(current page.north east)},y={(current page.south west)}]
+            \node[align=center, anchor=center, mygreen] at (0.5, 0.35){\fontsize{30pt}{30pt}\selectfont\mdseries\partname~\thepart};
+            \draw[mygreen, line width=2pt] (0.880952381, 1) -- (0.880952381, 0.9);
+          \end{scope}
+        \end{tikzpicture}
+      }
+      \gdef\partnumber{}%
+    }
+]{partnumber}
+\DeclareNewPageStyleByLayers{part}{partnumber}
+\renewcommand\partpagestyle{part}
+\renewcommand*{\partformat}{\gdef\partnumber{\thepart}}
+
+% specific font settings
+\addtokomafont{part}{\fontsize{50pt}{50pt}\selectfont\textcolor{mygreen}}
+\addtokomafont{pagenumber}{\color{chaptercolor}}
+\renewcommand\raggedchapter{\raggedleft}
+\setkomafont{chapter}{\Huge}
+\setkomafont{chapterprefix}{\Large}
+\newkomafont{chapternumber}{\fontsize{50pt}{10pt}\selectfont}
+\addtokomafont{captionlabel}{\bfseries\color{chaptercolor}}
+\addtokomafont{caption}{\linespread{1.5}\selectfont\sffamily\color{chaptercolor}}
+\renewcommand*{\bibfont}{\small}
+
+% chapter headings
+\tikzset{
+  headings/base/.style = {
+      outer sep = 0pt,
+      inner sep = 5pt,
+    },
+  headings/chapterbackground/.style = {
+      headings/base,
+      shade,
+      left color = white,
+      right color = chaptercolor,
+    },
+  headings/chapapp/.style = {
+      headings/base,
+      text = chaptercolor,
+      font = \usekomafont{chapterprefix}
+    },
+  headings/chapternumber/.style= {
+      headings/base,
+      text = chaptercolor,
+      font = \usekomafont{chapternumber}
+    },
+  headings/chapterline/.style = {
+      chaptercolor,
+      line width = 2pt
+    }
+}
+\makeatletter
+\renewcommand*\chapterlinesformat[3]{%
+  \Ifstr{#1}{chapter}{%
+    \begin{tikzpicture}[baseline=(title.base)]
+      \node[headings/chapterbackground](title){%
+        \parbox[t][\height]
+        {\dimexpr\textwidth-3\pgfkeysvalueof{/pgf/inner xsep}\relax}
+        {\raggedchapter #3}%
+      };
+      \node[headings/chapapp,anchor=south east, yshift=-4pt]
+      at (title.north east){\Ifstr{#2}{}{}{\chapapp}};
+      \useasboundingbox
+      (current bounding box.north west)
+      rectangle
+      ([yshift=-10pt]current bounding box.south east);
+      \draw[headings/chapterline]
+      (current bounding box.south east)++(-.5\pgflinewidth,0)--+(0,\paperheight);
+      \node[anchor=base west,headings/chapternumber]
+      at([xshift=5pt]title.base-|current bounding box.east){#2};
+    \end{tikzpicture}
+    \par
+  }{%
+    \@hangfrom{#2}{#3}% other section levels using style=chapter
+  }%
+}
+\makeatother
+
+% section
+\newkomafont{sectionnumber}{\Large}
+\renewcommand\sectionformat{%
+  \colorbox{chaptercolor}{%
+    \enskip\usekomafont{sectionnumber}{\thesection\autodot}\enskip}%
+  \quad%
+}
+
+\usepackage{gb4e}
+\usepackage{etoolbox}
+% roman footnotes in examples
+\makeatletter
+\patchcmd{\@footnotetext}{\setcounter{fnx}{0}}{\renewcommand{\thexnumi}{\roman{xnumi}}}{}{}
+\apptocmd{\@footnotetext}{
+    \@noftnotetrue
+    \renewcommand{\thexnumi}{\arabic{xnumi}}%
+}{}{}
+\makeatother
+
+\AtBeginEnvironment{Shaded}{\smaller}
+\AtBeginEnvironment{verbatim}{\smaller}
+
+% document body
+\begin{document}
+\maketitle
+
+\tableofcontents
+\hypertarget{experiment-description}{%
+\part{Experiment Description}\label{experiment-description}}
+
+\hypertarget{authors}{%
+\chapter{Author(s)}\label{authors}}
+
+\begin{itemize}
+\tightlist
+\item
+  Musterfrau, Eva; Mustermann, Max \& Mustermensch, CJ
+\end{itemize}
+
+\hypertarget{design}{%
+\chapter{Design}\label{design}}
+
+\hypertarget{independent-variables}{%
+\section{Independent Variables}\label{independent-variables}}
+
+\textsc{Factor1} \(\times\) \textsc{Factor2}
+
+\begin{itemize}
+\tightlist
+\item
+  Factor1 (within-items, within-subjects): bla, bli
+\item
+  Factor2 (within-items, within-subjects): blu, blo
+\end{itemize}
+
+\hypertarget{dependent-variables}{%
+\section{Dependent Variables}\label{dependent-variables}}
+
+\begin{itemize}
+\tightlist
+\item
+  Judgments {[}1 \ldots 7{]}, Reaction Times, 2AFC {[}option1,
+  option2{]}, \ldots
+\end{itemize}
+
+\hypertarget{participants}{%
+\chapter{Participants}\label{participants}}
+
+\begin{itemize}
+\tightlist
+\item
+  Number of participants:
+\item
+  Participant information we need to collect
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Major
+  \item
+    Age
+  \item
+    Native Language
+  \item
+    \ldots
+  \end{itemize}
+\item
+  Eligibility criteria for participants
+
+  \begin{itemize}
+  \tightlist
+  \item
+    non-biblingual
+  \item
+    Students (18 to 28 y/o, from Göttingen)
+  \item
+    \ldots
+  \end{itemize}
+\item
+  Reimbursement
+\end{itemize}
+
+\hypertarget{materials}{%
+\chapter{Materials}\label{materials}}
+
+\begin{itemize}
+\tightlist
+\item
+  Number of critical items
+\item
+  Number of filler/control items
+\item
+  randomized/pseudo-randomized
+\item
+  text/audio stimuli (who's doing the recording)
+\end{itemize}
+
+\hypertarget{critical-items}{%
+\section{Critical items}\label{critical-items}}
+
+\begin{exe}
+    \ex \begin{xlist}
+        \ex Example Sentence
+        \ex Example Sentence
+        \ex Example Sentence
+        \ex Example Sentence
+    \end{xlist}
+\end{exe}
+
+What are going to control (hold constant)?
+
+\begin{itemize}
+\tightlist
+\item
+  Number
+\item
+  Gender
+\item
+  Syllable length
+\item
+  \ldots
+\end{itemize}
+
+\hypertarget{fillerscontrols}{%
+\section{Fillers/Controls}\label{fillerscontrols}}
+
+\begin{exe}
+    \ex \begin{xlist}
+        \ex Type
+
+        Example Sentence
+        \ex Type
+
+        Example Sentence
+    \end{xlist}
+\end{exe}
+
+\hypertarget{procedure}{%
+\chapter{Procedure}\label{procedure}}
+
+\begin{itemize}
+\tightlist
+\item
+  How is the data collected?
+\item
+  What is the experimental setup?
+\end{itemize}
+
+\hypertarget{hypothesis}{%
+\chapter{Hypothesis}\label{hypothesis}}
+
+\begin{itemize}
+\tightlist
+\item
+  Hypothesis in words (main effects, interactions, a priori contrasts
+\item
+  Statistical methods (LMM, ANOVA, \ldots); exepected equivalence (TOST)
+\item
+  Why do we expect that result (previous results/studies, theoretical
+  assumptions, \ldots)
+\end{itemize}
+
+\hypertarget{plot}{%
+\section{Plot}\label{plot}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d \textless{}{-}}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
+  \DataTypeTok{factor1 =} \KeywordTok{c}\NormalTok{(}\StringTok{"bla"}\NormalTok{, }\StringTok{"bla"}\NormalTok{, }\StringTok{"bli"}\NormalTok{, }\StringTok{"bli"}\NormalTok{),}
+  \DataTypeTok{factor2 =} \KeywordTok{c}\NormalTok{(}\StringTok{"blu"}\NormalTok{, }\StringTok{"blo"}\NormalTok{, }\StringTok{"blu"}\NormalTok{, }\StringTok{"blo"}\NormalTok{),}
+  \DataTypeTok{judgment =} \KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{)}
+
+\KeywordTok{kable}\NormalTok{(d, }\DataTypeTok{booktabs =}\NormalTok{ T) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{kable\_styling}\NormalTok{(}\DataTypeTok{position =} \StringTok{"center"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{llr}
+\toprule
+factor1 & factor2 & judgment\\
+\midrule
+bla & blu & 7\\
+bla & blo & 4\\
+bli & blu & 5\\
+bli & blo & 1\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{figs/mean-lines-1} \end{center}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{figs/freq-bars-1} \end{center}
+
+\hypertarget{contrasts-if-applicable}{%
+\section{Contrasts (if applicable)}\label{contrasts-if-applicable}}
+
+\begin{itemize}
+\tightlist
+\item
+  List them here \autocite{heimkratzer1998semantics}
+\end{itemize}
+
+\hypertarget{checklist}{%
+\section{Checklist}\label{checklist}}
+
+\begin{todolist}
+  \item[\done] We can be sure that the participants understood the items.
+
+  How? 
+
+  \item X
+
+  \item[\wontfix] Y
+\end{todolist}
+
+\hypertarget{details}{%
+\part{Details}\label{details}}
+
+\hypertarget{introductory-textrecording}{%
+\chapter{Introductory Text/recording}\label{introductory-textrecording}}
+
+\textcite{tarski1944semantic}
+
+\textcite{dayal2009variation}
+
+    \printbibliography[heading=bibintoc]
+
+
+\end{document}

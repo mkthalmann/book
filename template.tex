@@ -1,0 +1,403 @@
+%!TEX program = xelatex
+\RequirePackage{xcolor}
+\documentclass[
+    numbers=noenddot,
+    open=any,
+    paper=a4,
+    oneside,
+    pagesize,
+    captions=tableheading,
+    bibliography=totoc,
+    $if(fontsize)$$fontsize$$endif$
+    $for(classoption)$$classoption$$sep$,$endfor$]{scrbook}
+\usepackage[
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm,
+    heightrounded
+]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage[warnings-off={mathtools-colon, mathtools-overbracket}]{unicode-math}
+\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\newcommand{\euro}{€}
+$if(mainfont)$
+\setmainfont[Scale=MatchLowercase,$mainfontoptions$]{$mainfont$}
+$endif$
+$if(sansfont)$
+\setsansfont[Scale=MatchLowercase,$sansfontoptions$]{$sansfont$}
+$endif$
+$if(monofont)$
+\setmonofont[Mapping=tex-ansi,Scale=MatchLowercase$if(monofontoptions)$,$monofontoptions$$endif$]{$monofont$}
+$endif$
+$if(mathfont)$
+\setmathfont{$mathfont$}
+$endif$
+\usepackage{upquote}
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath}
+% disable orphaned lines
+\clubpenalty=10000
+\displaywidowpenalty=10000
+\widowpenalty=10000
+\tolerance 1414
+\hbadness 1414
+\emergencystretch 1.5em
+\hfuzz 0.3pt
+\vfuzz 0.3pt
+\raggedbottom
+% more space between footnote and text
+\setlength{\skip\footins}{7mm}
+% footnotes
+\deffootnote{2.25em}{1.75em}{\thefootnotemark\enspace}
+
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{ngerman}
+
+\usepackage{csquotes}
+$if(biblatex)$
+\usepackage[
+    backend=biber,
+    bibstyle=biblatex-sp-unified,
+    citestyle=sp-authoryear-comp,
+    maxcitenames=3,
+    maxbibnames=99,
+    url=false
+]{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$endif$
+$if(listings)$
+\usepackage{listings}
+$endif$
+$if(lhs)$
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+$endif$
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+$if(graphics)$
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight0.8\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+$endif$
+
+$if(links-as-notes)$
+% Make links footnotes instead of hotlinks:
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+$endif$
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+    \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+$if(title)$
+\title{$title$}
+$endif$
+$if(subtitle)$
+\subtitle{$subtitle$}
+$endif$
+$if(publishers)$
+\subtitle{$publishers$}
+$endif$
+$if(titlehead)$
+\subtitle{$titlehead$}
+$endif$
+$if(subject)$
+\subtitle{$subject$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+\date{$date$}
+\uppertitleback{Obiger Titelrückentitel}
+\lowertitleback{Für dieses Beispiel wird keine Haftung übernommen.}
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+%%--------------------------
+
+\usepackage{multicol}
+\renewcommand{\arraystretch}{1.03}
+\usepackage{ltablex}
+\usepackage{booktabs}
+\usepackage{float}
+
+% colors
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{
+    decorations.text, backgrounds, arrows.meta,
+    decorations.pathreplacing, calc, fit,
+    shapes,positioning, intersections, decorations.markings
+}
+\definecolor{mygreen}{RGB}{6, 107, 138} % 0, 19, 108
+\definecolor{myred}{RGB}{141, 144, 150} %        96, 106, 179;
+\definecolor{chaptercolor}{RGB}{188, 193, 204}
+\newcommand*{\mygreen}[1]{\textcolor{mygreen}{\textbf{#1}}}
+\newcommand*{\myred}[1]{\textcolor{myred}{\textbf{#1}}}
+
+% trees in interpretation function
+\newbox\mytreebox
+\newbox\mytreeboxwithdelim
+\makeatletter
+\newcommand\TreeWithDelim [1]{%
+  \setbox\mytreebox\hbox{{#1}}%
+  \setbox\mytreeboxwithdelim\hbox{$$\left\llbracket\vcenter{\copy\mytreebox}\right\rrbracket$$}%
+  \dimen@=\dimexpr\ht\mytreeboxwithdelim+\dp\mytreeboxwithdelim\relax
+  % in my testing, same as total height of non decorated tree box
+  \leavevmode\raise\dimexpr-.5\dimen@-\fontdimen22\textfont2+\ht\mytreebox\relax\box\mytreeboxwithdelim
+}
+\newcommand\TreeWithDelimParen [1]{%
+  \setbox\mytreebox\hbox{{#1}}%
+  \setbox\mytreeboxwithdelim\hbox{$$\left(\left\llbracket\vcenter{\copy\mytreebox}\right\rrbracket\right)$$}%
+  \dimen@=\dimexpr\ht\mytreeboxwithdelim+\dp\mytreeboxwithdelim\relax
+  % in my testing, same as total height of non decorated tree box
+  \leavevmode\raise\dimexpr-.5\dimen@-\fontdimen22\textfont2+\ht\mytreebox\relax\box\mytreeboxwithdelim
+}
+\makeatother
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks  = true,
+    urlcolor    = mygreen,
+    linkcolor   = mygreen,
+    citecolor   = mygreen,
+    pdfauthor   = {Maik Thalmann},
+    pdfproducer = {XeLaTeX},
+    pdfsubject  = {Linguistics; $date$},
+}
+
+% packages necessary for the semantics
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage[cal=esstix]{mathalfa}
+\usepackage{upgreek}
+\usepackage{wasysym}
+\usepackage{stmaryrd}
+\usepackage{soul}
+\newcommand{\sem}[1]{\mbox{$$\llbracket$$\sffamily\textbf{#1}$$\rrbracket$$}}
+
+% checklists
+\usepackage{enumitem}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$$\square$$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\done}{\rlap{$$\square$$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+    \hspace{-2.5pt}}
+\newcommand{\wontfix}{\rlap{$$\square$$}{\large\hspace{1pt}\xmark}}
+
+% header and footer
+\usepackage{scrlayer-scrpage}
+\clearscrheadfoot
+% smaller header font size
+\ohead{$title$}
+\ofoot{\pagemark}
+\ifoot{$contact$}
+\pagestyle{scrheadings}
+
+% ToC
+\BeforeTOCHead[toc]{%
+  \KOMAoptions{parskip=false}
+}
+% change depth of TOC
+\setcounter{tocdepth}{0}
+% only number parts, chapters, and sections
+\setcounter{secnumdepth}{1}
+% custom entry formats for parts and chapters in ToC
+\DeclareTOCStyleEntry[
+  indent=2.5cm,
+  beforeskip=.4cm,
+  entryformat=\sffamily\large\textbf,
+  pagenumberformat=\scriptsize\rmfamily\color{chaptercolor},
+  linefill=\quad,
+  raggedpagenumber
+]{chapter}{part}
+\DeclareTOCStyleEntry[
+  indent=3.5cm,
+  beforeskip=.1cm,
+  entryformat=\sffamily,
+  pagenumberformat=\scriptsize\rmfamily\color{chaptercolor},
+  linefill=\quad,
+  raggedpagenumber
+]{chapter}{chapter}
+
+\usepackage{relsize}
+\usepackage[framemethod=tikz]{mdframed}
+% custom rule environment
+\newmdenv[
+  linecolor=chaptercolor,
+  linewidth=2pt,
+  topline=false,
+  bottomline=false,
+  rightmargin=0,
+  leftmargin=0,
+  innerrightmargin=5pt,
+  innerleftmargin=5pt
+]{rulebox}
+% custom quotation environment
+\newmdenv[
+  linecolor=chaptercolor,
+  backgroundcolor=chaptercolor!20,
+  linewidth=4pt,
+  font=\smaller,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  innerrightmargin=5pt,
+  innerleftmargin=5pt
+]{quotebox}
+
+% part page
+\newcommand*\partnumber{}
+\DeclareNewLayer[
+  background,
+  textarea,
+  mode=picture,
+  contents={%
+      \putC{
+        \begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
+          \begin{scope}[x={(current page.north east)},y={(current page.south west)}]
+            \node[align=center, anchor=center, mygreen] at (0.5, 0.35){\fontsize{30pt}{30pt}\selectfont\mdseries\partname~\thepart};
+            \draw[mygreen, line width=2pt] (0.880952381, 1) -- (0.880952381, 0.9);
+          \end{scope}
+        \end{tikzpicture}
+      }
+      \gdef\partnumber{}%
+    }
+]{partnumber}
+\DeclareNewPageStyleByLayers{part}{partnumber}
+\renewcommand\partpagestyle{part}
+\renewcommand*{\partformat}{\gdef\partnumber{\thepart}}
+
+% specific font settings
+\addtokomafont{part}{\fontsize{50pt}{50pt}\selectfont\textcolor{mygreen}}
+\addtokomafont{pagenumber}{\color{chaptercolor}}
+\renewcommand\raggedchapter{\raggedleft}
+\setkomafont{chapter}{\Huge}
+\setkomafont{chapterprefix}{\Large}
+\newkomafont{chapternumber}{\fontsize{50pt}{10pt}\selectfont}
+\addtokomafont{captionlabel}{\bfseries\color{chaptercolor}}
+\addtokomafont{caption}{\linespread{1.5}\selectfont\sffamily\color{chaptercolor}}
+\renewcommand*{\bibfont}{\small}
+
+% chapter headings
+\tikzset{
+  headings/base/.style = {
+      outer sep = 0pt,
+      inner sep = 5pt,
+    },
+  headings/chapterbackground/.style = {
+      headings/base,
+      shade,
+      left color = white,
+      right color = chaptercolor,
+    },
+  headings/chapapp/.style = {
+      headings/base,
+      text = chaptercolor,
+      font = \usekomafont{chapterprefix}
+    },
+  headings/chapternumber/.style= {
+      headings/base,
+      text = chaptercolor,
+      font = \usekomafont{chapternumber}
+    },
+  headings/chapterline/.style = {
+      chaptercolor,
+      line width = 2pt
+    }
+}
+\makeatletter
+\renewcommand*\chapterlinesformat[3]{%
+  \Ifstr{#1}{chapter}{%
+    \begin{tikzpicture}[baseline=(title.base)]
+      \node[headings/chapterbackground](title){%
+        \parbox[t][\height]
+        {\dimexpr\textwidth-3\pgfkeysvalueof{/pgf/inner xsep}\relax}
+        {\raggedchapter #3}%
+      };
+      \node[headings/chapapp,anchor=south east, yshift=-4pt]
+      at (title.north east){\Ifstr{#2}{}{}{\chapapp}};
+      \useasboundingbox
+      (current bounding box.north west)
+      rectangle
+      ([yshift=-10pt]current bounding box.south east);
+      \draw[headings/chapterline]
+      (current bounding box.south east)++(-.5\pgflinewidth,0)--+(0,\paperheight);
+      \node[anchor=base west,headings/chapternumber]
+      at([xshift=5pt]title.base-|current bounding box.east){#2};
+    \end{tikzpicture}
+    \par
+  }{%
+    \@hangfrom{#2}{#3}% other section levels using style=chapter
+  }%
+}
+\makeatother
+
+% section
+\newkomafont{sectionnumber}{\Large}
+\renewcommand\sectionformat{%
+  \colorbox{chaptercolor}{%
+    \enskip\usekomafont{sectionnumber}{\thesection\autodot}\enskip}%
+  \quad%
+}
+
+\usepackage{gb4e}
+\usepackage{etoolbox}
+% roman footnotes in examples
+\makeatletter
+\patchcmd{\@footnotetext}{\setcounter{fnx}{0}}{\renewcommand{\thexnumi}{\roman{xnumi}}}{}{}
+\apptocmd{\@footnotetext}{
+    \@noftnotetrue
+    \renewcommand{\thexnumi}{\arabic{xnumi}}%
+}{}{}
+\makeatother
+
+\AtBeginEnvironment{Shaded}{\smaller}
+\AtBeginEnvironment{verbatim}{\smaller}
+
+% document body
+\begin{document}
+$if(title)$
+\maketitle
+$endif$
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+$if(toc)$
+\tableofcontents
+$endif$
+$body$
+
+$if(biblatex)$
+    \printbibliography[heading=bibintoc]
+$endif$
+
+$for(include-after)$
+$include-after$
+
+$endfor$
+
+\end{document}
