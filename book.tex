@@ -112,6 +112,20 @@
 \date{Göttingen, 12 April, 2020}
 \uppertitleback{Obiger Titelrückentitel}
 \lowertitleback{Für dieses Beispiel wird keine Haftung übernommen.}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 
 %%--------------------------
 
@@ -417,6 +431,33 @@ bli & blo & 1\\
 \textcite{tarski1944semantic}
 
 \textcite{dayal2009variation}
+
+\hypertarget{all-the-code-i-used}{%
+\chapter*{All The Code I Used}\label{all-the-code-i-used}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d \textless{}{-}}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
+  \DataTypeTok{factor1 =} \KeywordTok{c}\NormalTok{(}\StringTok{"bla"}\NormalTok{, }\StringTok{"bla"}\NormalTok{, }\StringTok{"bli"}\NormalTok{, }\StringTok{"bli"}\NormalTok{),}
+  \DataTypeTok{factor2 =} \KeywordTok{c}\NormalTok{(}\StringTok{"blu"}\NormalTok{, }\StringTok{"blo"}\NormalTok{, }\StringTok{"blu"}\NormalTok{, }\StringTok{"blo"}\NormalTok{),}
+  \DataTypeTok{judgment =} \KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{)}
+
+\KeywordTok{kable}\NormalTok{(d, }\DataTypeTok{booktabs =}\NormalTok{ T) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{kable\_styling}\NormalTok{(}\DataTypeTok{position =} \StringTok{"center"}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ factor1, }\DataTypeTok{y =}\NormalTok{ judgment, }\DataTypeTok{pch =}\NormalTok{ factor2, }\DataTypeTok{color =}\NormalTok{ factor2, }\DataTypeTok{group =}\NormalTok{ factor2)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme\_maik}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale\_color\_grey}\NormalTok{()}
+\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ factor1, }\DataTypeTok{y =}\NormalTok{ judgment, }\DataTypeTok{fill =}\NormalTok{ factor2, }\DataTypeTok{color =}\NormalTok{ factor2)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_col}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{, }\DataTypeTok{position =} \KeywordTok{position\_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme\_maik}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale\_color\_grey}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale\_fill\_grey}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
 
     \printbibliography[heading=bibintoc]
 
