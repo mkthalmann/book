@@ -23,3 +23,4 @@
 *.xml
 cache/
 figs/
+setup.R
