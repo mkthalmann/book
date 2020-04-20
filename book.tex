@@ -6,7 +6,7 @@
     paper=a4,
     oneside,
     pagesize,
-    captions=tableheading,
+    captions=tableabove,
     bibliography=totoc,
     11pt
     ]{scrbook}
@@ -54,7 +54,8 @@
     citestyle=sp-authoryear-comp,
     maxcitenames=3,
     maxbibnames=99,
-    url=false
+    url=false,
+    doi=false
 ]{biblatex}
 \addbibresource{../bibliographyuni.bib}
 \usepackage{color}
@@ -109,23 +110,9 @@
 \subtitle{Linguistics}
 \author{Maik Thalmann\footnote{Georg-August-University Göttingen,
   \href{mailto:maik.thalmann@gmail.com}{\nolinkurl{maik.thalmann@gmail.com}}}}
-\date{Göttingen, 12 April, 2020}
+\date{Göttingen, 20 April, 2020}
 \uppertitleback{Obiger Titelrückentitel}
 \lowertitleback{Für dieses Beispiel wird keine Haftung übernommen.}
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{wrapfig}
-\usepackage{float}
-\usepackage{colortbl}
-\usepackage{pdflscape}
-\usepackage{tabu}
-\usepackage{threeparttable}
-\usepackage{threeparttablex}
-\usepackage[normalem]{ulem}
-\usepackage{makecell}
-\usepackage{xcolor}
 
 %%--------------------------
 
@@ -177,7 +164,7 @@
     citecolor   = mygreen,
     pdfauthor   = {Maik Thalmann},
     pdfproducer = {XeLaTeX},
-    pdfsubject  = {Linguistics; Göttingen, 12 April, 2020},
+    pdfsubject  = {Linguistics; Göttingen, 20 April, 2020},
 }
 
 % packages necessary for the semantics
@@ -292,8 +279,12 @@
 \setkomafont{chapterprefix}{\Large}
 \newkomafont{chapternumber}{\fontsize{50pt}{10pt}\selectfont}
 \addtokomafont{captionlabel}{\bfseries\color{chaptercolor}}
-\addtokomafont{caption}{\linespread{1.5}\selectfont\sffamily\color{chaptercolor}}
+\addtokomafont{caption}{\selectfont\sffamily\color{chaptercolor}}
 \renewcommand*{\bibfont}{\small}
+
+\usepackage{caption}
+\captionsetup[table]{position=top,skip=0pt}
+\captionsetup[figure]{skip=0pt}
 
 % chapter headings
 \tikzset{
@@ -384,27 +375,30 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{d \textless{}{-}}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
-  \DataTypeTok{factor1 =} \KeywordTok{c}\NormalTok{(}\StringTok{"bla"}\NormalTok{, }\StringTok{"bla"}\NormalTok{, }\StringTok{"bli"}\NormalTok{, }\StringTok{"bli"}\NormalTok{),}
-  \DataTypeTok{factor2 =} \KeywordTok{c}\NormalTok{(}\StringTok{"blu"}\NormalTok{, }\StringTok{"blo"}\NormalTok{, }\StringTok{"blu"}\NormalTok{, }\StringTok{"blo"}\NormalTok{),}
-  \DataTypeTok{judgment =} \KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{1}\NormalTok{)}
-\NormalTok{)}
+\NormalTok{d \textless{}{-}}\StringTok{ }\NormalTok{diamonds}
 
-\KeywordTok{kable}\NormalTok{(d, }\DataTypeTok{booktabs =}\NormalTok{ T) }\OperatorTok{\%\textgreater{}\%}
-\StringTok{  }\KeywordTok{kable\_styling}\NormalTok{(}\DataTypeTok{position =} \StringTok{"center"}\NormalTok{)}
+\NormalTok{d }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{head}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{booktabs =}\NormalTok{ T, }\DataTypeTok{caption =} \StringTok{"Data we will be working with."}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{kable\_styling}\NormalTok{(}\DataTypeTok{position =} \StringTok{"center"}\NormalTok{, }\DataTypeTok{latex\_options =} \StringTok{"hold\_position"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}[H]
+\begin{table}[!h]
+
+\caption{\label{tab:data}Data we will be working with.}
 \centering
-\begin{tabular}{llr}
+\begin{tabular}[t]{rlllrrrrrr}
 \toprule
-factor1 & factor2 & judgment\\
+carat & cut & color & clarity & depth & table & price & x & y & z\\
 \midrule
-bla & blu & 7\\
-bla & blo & 4\\
-bli & blu & 5\\
-bli & blo & 1\\
+0.23 & Ideal & E & SI2 & 61.5 & 55 & 326 & 3.95 & 3.98 & 2.43\\
+0.21 & Premium & E & SI1 & 59.8 & 61 & 326 & 3.89 & 3.84 & 2.31\\
+0.23 & Good & E & VS1 & 56.9 & 65 & 327 & 4.05 & 4.07 & 2.31\\
+0.29 & Premium & I & VS2 & 62.4 & 58 & 334 & 4.20 & 4.23 & 2.63\\
+0.31 & Good & J & SI2 & 63.3 & 58 & 335 & 4.34 & 4.35 & 2.75\\
+\addlinespace
+0.24 & Very Good & J & VVS2 & 62.8 & 57 & 336 & 3.94 & 3.96 & 2.48\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -412,15 +406,77 @@ bli & blo & 1\\
 \hypertarget{another-section}{%
 \chapter{Another Section}\label{another-section}}
 
+In Figure \ref{tab:dlookrdiag}, we can see the amount and proportion of
+missing data; and I'm checking to see how references work.
+
+\begin{table}[!h]
+
+\caption{\label{tab:dlookrdiag}Missing values check.}
+\centering
+\begin{tabular}[t]{llrrrr}
+\toprule
+variables & types & missing\_count & missing\_percent & unique\_count & unique\_rate\\
+\midrule
+carat & numeric & 0 & 0 & 273 & 0.0050612\\
+cut & ordered & 0 & 0 & 5 & 0.0000927\\
+color & ordered & 0 & 0 & 7 & 0.0001298\\
+clarity & ordered & 0 & 0 & 8 & 0.0001483\\
+depth & numeric & 0 & 0 & 184 & 0.0034112\\
+\addlinespace
+table & numeric & 0 & 0 & 127 & 0.0023545\\
+price & integer & 0 & 0 & 11602 & 0.2150908\\
+x & numeric & 0 & 0 & 554 & 0.0102707\\
+y & numeric & 0 & 0 & 552 & 0.0102336\\
+z & numeric & 0 & 0 & 375 & 0.0069522\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!h]
+
+\caption{\label{tab:dlookrdesc}Descriptive statistics for diamond price based on the diamond cut.}
+\centering
+\begin{tabular}[t]{llrrrrrrrr}
+\toprule
+variable & cut & n & na & mean & sd & se\_mean & IQR & skewness & kurtosis\\
+\midrule
+price & Fair & 1610 & 0 & 4358.758 & 3560.387 & 88.73281 & 3155.25 & 1.783535 & 3.088025\\
+price & Good & 4906 & 0 & 3928.864 & 3681.590 & 52.56197 & 3883.00 & 1.722996 & 3.049343\\
+price & Very Good & 12082 & 0 & 3981.760 & 3935.862 & 35.80721 & 4460.75 & 1.595738 & 2.238162\\
+price & Premium & 13791 & 0 & 4584.258 & 4349.205 & 37.03497 & 5250.00 & 1.333648 & 1.073710\\
+price & Ideal & 21551 & 0 & 3457.542 & 3808.401 & 25.94233 & 3800.50 & 1.835843 & 2.978950\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!h]
+
+\caption{\label{tab:report}Data overview.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lllllll}
+\toprule
+Characteristic & Fair (n=1610) & Good (n=4906) & Very Good (n=12082) & Premium (n=13791) & Ideal (n=21551) & Total\\
+\midrule
+Mean price (SD) & 4358.8 (3560.4) & 3928.9 (3681.6) & 3981.8 (3935.9) & 4584.3 (4349.2) & 3457.5 (3808.4) & 3932.8 (3989.4)\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
 \hypertarget{a-subsection}{%
 \section{A Subsection}\label{a-subsection}}
 
 \hypertarget{another-subsection}{%
 \section{Another Subsection}\label{another-subsection}}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{figs/mean-lines-1} \end{center}
+\begin{figure}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{figs/freq-bars-1} \end{center}
+{\centering \includegraphics[width=0.8\linewidth]{figs/mean-lines-1} 
+
+}
+
+\caption{A sample plot.}\label{fig:mean-lines}
+\end{figure}
 
 \hypertarget{another-part}{%
 \part{Another Part}\label{another-part}}
@@ -437,24 +493,33 @@ bli & blo & 1\\
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{d \textless{}{-}}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
-  \DataTypeTok{factor1 =} \KeywordTok{c}\NormalTok{(}\StringTok{"bla"}\NormalTok{, }\StringTok{"bla"}\NormalTok{, }\StringTok{"bli"}\NormalTok{, }\StringTok{"bli"}\NormalTok{),}
-  \DataTypeTok{factor2 =} \KeywordTok{c}\NormalTok{(}\StringTok{"blu"}\NormalTok{, }\StringTok{"blo"}\NormalTok{, }\StringTok{"blu"}\NormalTok{, }\StringTok{"blo"}\NormalTok{),}
-  \DataTypeTok{judgment =} \KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{1}\NormalTok{)}
-\NormalTok{)}
+\NormalTok{d \textless{}{-}}\StringTok{ }\NormalTok{diamonds}
 
-\KeywordTok{kable}\NormalTok{(d, }\DataTypeTok{booktabs =}\NormalTok{ T) }\OperatorTok{\%\textgreater{}\%}
-\StringTok{  }\KeywordTok{kable\_styling}\NormalTok{(}\DataTypeTok{position =} \StringTok{"center"}\NormalTok{)}
-\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ factor1, }\DataTypeTok{y =}\NormalTok{ judgment, }\DataTypeTok{pch =}\NormalTok{ factor2, }\DataTypeTok{color =}\NormalTok{ factor2, }\DataTypeTok{group =}\NormalTok{ factor2)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom\_point}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom\_line}\NormalTok{() }\OperatorTok{+}
+\NormalTok{d }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{head}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{booktabs =}\NormalTok{ T, }\DataTypeTok{caption =} \StringTok{"Data we will be working with."}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{kable\_styling}\NormalTok{(}\DataTypeTok{position =} \StringTok{"center"}\NormalTok{, }\DataTypeTok{latex\_options =} \StringTok{"hold\_position"}\NormalTok{)}
+\NormalTok{d }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{diagnose}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{booktabs =}\NormalTok{ T, }\DataTypeTok{caption =} \StringTok{"Missing values check."}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{kable\_styling}\NormalTok{(}\DataTypeTok{position =} \StringTok{"center"}\NormalTok{, }\DataTypeTok{latex\_options =} \StringTok{"hold\_position"}\NormalTok{)}
+\NormalTok{d }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(cut) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{describe}\NormalTok{(price) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\KeywordTok{starts\_with}\NormalTok{(}\StringTok{"p"}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{booktabs =}\NormalTok{ T, }\DataTypeTok{caption =} \StringTok{"Descriptive statistics for diamond price based on the diamond cut."}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{kable\_styling}\NormalTok{(}\DataTypeTok{position =} \StringTok{"center"}\NormalTok{, }\DataTypeTok{latex\_options =} \StringTok{"hold\_position"}\NormalTok{)}
+\NormalTok{d }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{report\_sample}\NormalTok{(}\DataTypeTok{group\_by =} \StringTok{"cut"}\NormalTok{, }\DataTypeTok{select =} \KeywordTok{c}\NormalTok{(}\StringTok{"price"}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{as.data.frame}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{booktabs =}\NormalTok{ T, }\DataTypeTok{caption =} \StringTok{"Data overview."}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{kable\_styling}\NormalTok{(}\DataTypeTok{position =} \StringTok{"center"}\NormalTok{, }\DataTypeTok{latex\_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"scale\_down"}\NormalTok{, }\StringTok{"hold\_position"}\NormalTok{))}
+\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ cut, }\DataTypeTok{y =}\NormalTok{ price, }\DataTypeTok{color =}\NormalTok{ price)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat\_summary}\NormalTok{(}\DataTypeTok{fun.y =}\NormalTok{ mean, }\DataTypeTok{geom =} \StringTok{"line"}\NormalTok{, }\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{group =} \DecValTok{1}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat\_summary}\NormalTok{(}\DataTypeTok{fun.y =}\NormalTok{ mean, }\DataTypeTok{geom =} \StringTok{"point"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat\_summary}\NormalTok{(}\DataTypeTok{fun.data =}\NormalTok{ mean\_cl\_normal, }\DataTypeTok{geom =} \StringTok{"errorbar"}\NormalTok{, }\DataTypeTok{width =} \FloatTok{.25}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{theme\_maik}\NormalTok{() }\OperatorTok{+}
 \StringTok{  }\KeywordTok{scale\_color\_grey}\NormalTok{()}
-\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ factor1, }\DataTypeTok{y =}\NormalTok{ judgment, }\DataTypeTok{fill =}\NormalTok{ factor2, }\DataTypeTok{color =}\NormalTok{ factor2)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom\_col}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{, }\DataTypeTok{position =} \KeywordTok{position\_dodge}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme\_maik}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale\_color\_grey}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale\_fill\_grey}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 

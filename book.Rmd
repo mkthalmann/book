@@ -42,36 +42,53 @@ read_chunk('setup.R')
 ## A Section
 
 ```{r data, echo = TRUE}
-d <- tibble(
-    factor1 = c("bla", "bla", "bli", "bli"),
-    factor2 = c("blu", "blo", "blu", "blo"),
-    judgment = c(7, 4, 5, 1)
-)
+d <- diamonds
 
-kable(d, booktabs = T) %>%
-  kable_styling(position = "center")
+d %>%
+    head() %>%
+    kable(booktabs = T, caption = "Data we will be working with.") %>%
+    kable_styling(position = "center", latex_options = "hold_position")
 ```
 
 ## Another Section
+
+In Figure \ref{tab:dlookrdiag}, we can see the amount and proportion of missing data; and I'm checking to see how references work. 
+
+```{r dlookrdiag}
+d %>%
+    diagnose() %>%
+    kable(booktabs = T, caption = "Missing values check.") %>%
+    kable_styling(position = "center", latex_options = "hold_position")
+```
+
+```{r dlookrdesc}
+d %>%
+    group_by(cut) %>%
+    describe(price) %>%
+    select(-starts_with("p")) %>%
+    kable(booktabs = T, caption = "Descriptive statistics for diamond price based on the diamond cut.") %>%
+    kable_styling(position = "center", latex_options = "hold_position")
+```
+
+```{r report}
+d %>%
+    report_sample(group_by = "cut", select = c("price")) %>%
+    as.data.frame() %>%
+    kable(booktabs = T, caption = "Data overview.") %>%
+    kable_styling(position = "center", latex_options= c("scale_down", "hold_position"))
+```
 
 ### A Subsection
 
 ### Another Subsection
 
-```{r mean-lines}
-ggplot(d, aes(x = factor1, y = judgment, pch = factor2, color = factor2, group = factor2)) +
-    geom_point() +
-    geom_line() +
+```{r mean-lines, fig.cap = "A sample plot."}
+ggplot(d, aes(x = cut, y = price, color = price)) +
+    stat_summary(fun.y = mean, geom = "line", mapping = aes(group = 1)) +
+    stat_summary(fun.y = mean, geom = "point") +
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = .25) +
     theme_maik() +
     scale_color_grey()
-```
-
-```{r freq-bars}
-ggplot(d, aes(x = factor1, y = judgment, fill = factor2, color = factor2)) +
-    geom_col(alpha = .5, position = position_dodge(width = 1)) +
-    theme_maik() +
-    scale_color_grey() +
-    scale_fill_grey()
 ```
 
 # Another Part
