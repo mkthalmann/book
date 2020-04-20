@@ -6,7 +6,7 @@
     paper=a4,
     oneside,
     pagesize,
-    captions=tableheading,
+    captions=tableabove,
     bibliography=totoc,
     $if(fontsize)$$fontsize$$endif$
     $for(classoption)$$classoption$$sep$,$endfor$]{scrbook}
@@ -63,7 +63,8 @@ $if(biblatex)$
     citestyle=sp-authoryear-comp,
     maxcitenames=3,
     maxbibnames=99,
-    url=false
+    url=false,
+    doi=false
 ]{biblatex}
 $for(bibliography)$
 \addbibresource{$bibliography$}
@@ -297,8 +298,12 @@ $endfor$
 \setkomafont{chapterprefix}{\Large}
 \newkomafont{chapternumber}{\fontsize{50pt}{10pt}\selectfont}
 \addtokomafont{captionlabel}{\bfseries\color{chaptercolor}}
-\addtokomafont{caption}{\linespread{1.5}\selectfont\sffamily\color{chaptercolor}}
+\addtokomafont{caption}{\selectfont\sffamily\color{chaptercolor}}
 \renewcommand*{\bibfont}{\small}
+
+\usepackage{caption}
+\captionsetup[table]{position=top,skip=0pt}
+\captionsetup[figure]{skip=0pt}
 
 % chapter headings
 \tikzset{
