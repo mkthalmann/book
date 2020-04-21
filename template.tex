@@ -221,12 +221,12 @@ $endfor$
   \KOMAoptions{parskip=false}
 }
 % change depth of TOC
-\setcounter{tocdepth}{0}
+\setcounter{tocdepth}{1}
 % only number parts, chapters, and sections
 \setcounter{secnumdepth}{1}
 % custom entry formats for parts and chapters in ToC
 \DeclareTOCStyleEntry[
-  indent=2.5cm,
+  indent=3cm,
   beforeskip=.4cm,
   entryformat=\sffamily\large\textbf,
   pagenumberformat=\scriptsize\rmfamily\color{chaptercolor},
@@ -234,13 +234,21 @@ $endfor$
   raggedpagenumber
 ]{chapter}{part}
 \DeclareTOCStyleEntry[
-  indent=3.5cm,
+  indent=3.7cm,
   beforeskip=.1cm,
   entryformat=\sffamily,
   pagenumberformat=\scriptsize\rmfamily\color{chaptercolor},
   linefill=\quad,
   raggedpagenumber
 ]{chapter}{chapter}
+\DeclareTOCStyleEntry[
+  indent=4.2cm,
+  beforeskip=.1cm,
+  entryformat=\sffamily,
+  pagenumberformat=\scriptsize\rmfamily\color{chaptercolor},
+  linefill=\quad,
+  raggedpagenumber
+]{chapter}{section}
 
 \usepackage{relsize}
 \usepackage[framemethod=tikz]{mdframed}
