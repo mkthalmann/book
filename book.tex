@@ -110,7 +110,7 @@
 \subtitle{Linguistics}
 \author{Maik Thalmann\footnote{Georg-August-University Göttingen,
   \href{mailto:maik.thalmann@gmail.com}{\nolinkurl{maik.thalmann@gmail.com}}}}
-\date{Göttingen, 20 April, 2020}
+\date{Göttingen, 21 April, 2020}
 \uppertitleback{Obiger Titelrückentitel}
 \lowertitleback{Für dieses Beispiel wird keine Haftung übernommen.}
 
@@ -164,7 +164,7 @@
     citecolor   = mygreen,
     pdfauthor   = {Maik Thalmann},
     pdfproducer = {XeLaTeX},
-    pdfsubject  = {Linguistics; Göttingen, 20 April, 2020},
+    pdfsubject  = {Linguistics; Göttingen, 21 April, 2020},
 }
 
 % packages necessary for the semantics
@@ -202,12 +202,12 @@
   \KOMAoptions{parskip=false}
 }
 % change depth of TOC
-\setcounter{tocdepth}{0}
+\setcounter{tocdepth}{1}
 % only number parts, chapters, and sections
 \setcounter{secnumdepth}{1}
 % custom entry formats for parts and chapters in ToC
 \DeclareTOCStyleEntry[
-  indent=2.5cm,
+  indent=3cm,
   beforeskip=.4cm,
   entryformat=\sffamily\large\textbf,
   pagenumberformat=\scriptsize\rmfamily\color{chaptercolor},
@@ -215,13 +215,21 @@
   raggedpagenumber
 ]{chapter}{part}
 \DeclareTOCStyleEntry[
-  indent=3.5cm,
+  indent=3.7cm,
   beforeskip=.1cm,
   entryformat=\sffamily,
   pagenumberformat=\scriptsize\rmfamily\color{chaptercolor},
   linefill=\quad,
   raggedpagenumber
 ]{chapter}{chapter}
+\DeclareTOCStyleEntry[
+  indent=4.2cm,
+  beforeskip=.1cm,
+  entryformat=\sffamily,
+  pagenumberformat=\scriptsize\rmfamily\color{chaptercolor},
+  linefill=\quad,
+  raggedpagenumber
+]{chapter}{section}
 
 \usepackage{relsize}
 \usepackage[framemethod=tikz]{mdframed}
@@ -367,11 +375,11 @@
 \maketitle
 
 \tableofcontents
-\hypertarget{part}{%
-\part{Part}\label{part}}
+\hypertarget{a-part}{%
+\part{A Part}\label{a-part}}
 
-\hypertarget{a-section}{%
-\chapter{A Section}\label{a-section}}
+\hypertarget{a-chapter}{%
+\chapter{A Chapter}\label{a-chapter}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -403,8 +411,11 @@ carat & cut & color & clarity & depth & table & price & x & y & z\\
 \end{tabular}
 \end{table}
 
-\hypertarget{another-section}{%
-\chapter{Another Section}\label{another-section}}
+\hypertarget{a-section}{%
+\section{A Section}\label{a-section}}
+
+\hypertarget{another-chapter}{%
+\chapter{Another Chapter}\label{another-chapter}}
 
 In Figure \ref{tab:dlookrdiag}, we can see the amount and proportion of
 missing data; and I'm checking to see how references work.
@@ -463,11 +474,11 @@ Mean price (SD) & 4358.8 (3560.4) & 3928.9 (3681.6) & 3981.8 (3935.9) & 4584.3 (
 \end{tabular}}
 \end{table}
 
-\hypertarget{a-subsection}{%
-\section{A Subsection}\label{a-subsection}}
+\hypertarget{another-section}{%
+\section{Another Section}\label{another-section}}
 
-\hypertarget{another-subsection}{%
-\section{Another Subsection}\label{another-subsection}}
+\hypertarget{yet-another-section}{%
+\section{Yet Another Section}\label{yet-another-section}}
 
 \begin{figure}
 
@@ -481,8 +492,8 @@ Mean price (SD) & 4358.8 (3560.4) & 3928.9 (3681.6) & 3981.8 (3935.9) & 4584.3 (
 \hypertarget{another-part}{%
 \part{Another Part}\label{another-part}}
 
-\hypertarget{some-additional-section}{%
-\chapter{Some Additional Section}\label{some-additional-section}}
+\hypertarget{some-additional-chapter}{%
+\chapter{Some Additional Chapter}\label{some-additional-chapter}}
 
 \textcite{tarski1944semantic}
 

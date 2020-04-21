@@ -20,9 +20,8 @@ output:
     keep_tex: true
     latex_engine: xelatex
     dev: cairo_pdf
-documentclass: scrartcl
 bibliography: ../bibliographyuni.bib
-mainfont: XITS
+mainfont: "XITS"
 sansfont: "Source Sans Pro"
 monofont: "Hack"
 mathfont: "Asana Math"
@@ -37,9 +36,9 @@ read_chunk('setup.R')
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
 ```
 
-# Part
+# A Part
 
-## A Section
+## A Chapter
 
 ```{r data, echo = TRUE}
 d <- diamonds
@@ -50,7 +49,9 @@ d %>%
     kable_styling(position = "center", latex_options = "hold_position")
 ```
 
-## Another Section
+### A Section
+
+## Another Chapter
 
 In Figure \ref{tab:dlookrdiag}, we can see the amount and proportion of missing data; and I'm checking to see how references work. 
 
@@ -78,9 +79,9 @@ d %>%
     kable_styling(position = "center", latex_options= c("scale_down", "hold_position"))
 ```
 
-### A Subsection
+### Another Section
 
-### Another Subsection
+### Yet Another Section
 
 ```{r mean-lines, fig.cap = "A sample plot."}
 ggplot(d, aes(x = cut, y = price, color = price)) +
@@ -93,7 +94,7 @@ ggplot(d, aes(x = cut, y = price, color = price)) +
 
 # Another Part
 
-## Some Additional Section
+## Some Additional Chapter
 
 @tarski1944semantic
 
