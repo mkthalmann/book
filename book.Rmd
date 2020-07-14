@@ -30,7 +30,7 @@ mathfont: "Asana Math"
 ```{r import, echo=FALSE, warning=FALSE, message=FALSE}
 # read chunk (does not run code)
 library(knitr)
-read_chunk('setup.R')
+read_chunk("setup.R")
 ```
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
@@ -76,7 +76,7 @@ d %>%
     report_sample(group_by = "cut", select = c("price")) %>%
     as.data.frame() %>%
     kable(booktabs = T, caption = "Data overview.") %>%
-    kable_styling(position = "center", latex_options= c("scale_down", "hold_position"))
+    kable_styling(position = "center", latex_options = c("scale_down", "hold_position"))
 ```
 
 ### Another Section
@@ -88,13 +88,22 @@ ggplot(d, aes(x = cut, y = price, color = price)) +
     stat_summary(fun.y = mean, geom = "line", mapping = aes(group = 1)) +
     stat_summary(fun.y = mean, geom = "point") +
     stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = .25) +
-    theme_maik() +
     scale_color_grey()
 ```
 
 # Another Part
 
 ## Some Additional Chapter
+
+\begin{quotebox}
+    Colorless green ideas sleep furiously.
+
+    *Furiously sleep ideas green colorless.\hfill\parencite{Chomsky1957}
+\end{quotebox}
+
+\begin{rulebox}
+    \textbf{\color{mygreen} Functional Application (FA)}\hfill {\footnotesize H\&K:49}\\Wenn $\alpha$ ein verzweigender Knoten ist, \{$\beta$, $\gamma$\} die Menge von $\alpha$'s Töchtern ist und \sem{$\symbf{\beta}$} eine Funktion ist, dessen Domäne \sem{$\symbf{\gamma}$} enthält, dann \sem{$\symbf{\alpha}$} = \sem{$\symbf{\beta}$}(\sem{$\symbf{\gamma}$}).
+\end{rulebox}
 
 @tarski1944semantic
 
@@ -103,8 +112,8 @@ ggplot(d, aes(x = cut, y = price, color = price)) +
 ## All The Code I Used {.unlisted .unnumbered}
 
 ```{r get-labels, echo = FALSE}
-labs = knitr::all_labels()
-labs = setdiff(labs, c("import", "setup", "get-labels"))
+labs <- knitr::all_labels()
+labs <- setdiff(labs, c("import", "setup", "get-labels"))
 ```
 
 ```{r all-code, ref.label=labs, eval = FALSE, echo = TRUE}
